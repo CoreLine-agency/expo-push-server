@@ -20,6 +20,7 @@
     "@types/fb": "0.0.23",
     "@types/lodash": "^4.14.108",
     "@types/node": "7.0.22",
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.2",
     "clean-deep": "^3.0.2",
@@ -59,5 +60,7 @@
     "tslint-eslint-rules": "^5.3.1",
     "tslint-microsoft-contrib": "^5.0.1"
   },
-  "engines" : { "node" : "^8.0.0" }
+  "engines": {
+    "node": "^8.0.0"
+  }
 }
