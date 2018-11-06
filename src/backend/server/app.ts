@@ -8,7 +8,7 @@ import { GraphQLServer, Options } from 'graphql-yoga';
 import * as jwt from 'jsonwebtoken';
 import * as Raven from 'raven';
 import { buildSchema } from 'type-graphql';
-import { createConnection, getConnection } from 'typeorm';
+import { ConnectionOptions, createConnection, getConnection } from 'typeorm';
 import { IRequestContext } from '../data/IRequestContext';
 import { AuthorizationMiddleware } from '../utils/auth/AuthorizationMiddleware';
 import { IToken } from '../utils/auth/IToken';
@@ -88,16 +88,11 @@ async function bootstrap() {
   }
   app.get('/files/:slug', asyncWrap(getFile));
 
-  const connectionOptions: any = {
+  const connectionOptions: ConnectionOptions = {
     entities: ['src/backend/data/models/**.ts'],
     type: config.databaseType,
-    database: config.databaseName,
-    synchronize: config.databaseSynchronize,
     logging: config.databaseLogging,
-    username: config.databaseUsername,
-    port: config.databasePort,
-    host: config.databaseHost,
-    password: config.databasePassword,
+    url: config.databaseUrl,
   };
 
   await createConnection(connectionOptions);

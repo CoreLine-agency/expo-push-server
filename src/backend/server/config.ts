@@ -15,4 +15,5 @@ export default {
   cryptoSecret: process.env.CRYPTO_SECRET || 'secret',
   jwtSecret: process.env.JWT_SECRET! || 'secret',
   sentryDsn: process.env.SENTRY_DSN!,
+  databaseUrl: process.env.DATABASE_URL,
 };
