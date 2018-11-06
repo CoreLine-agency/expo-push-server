@@ -93,6 +93,7 @@ async function bootstrap() {
     type: config.databaseType,
     logging: config.databaseLogging,
     url: config.databaseUrl,
+    synchronize: config.databaseSynchronize,
   };
 
   await createConnection(connectionOptions);
