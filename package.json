@@ -58,5 +58,6 @@
     "tslint-eslint-rules": "^5.3.1",
     "tslint-microsoft-contrib": "^5.0.1",
     "typescript": "2.5.2"
-  }
+  },
+  "engines" : { "node" : "^8.0.0" }
 }
