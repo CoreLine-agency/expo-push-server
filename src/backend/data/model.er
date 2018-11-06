@@ -1,0 +1,48 @@
+User:
+  - email?: string varchar
+  + passwordHash?: string varchar
+  x password
+  - firstName
+  - lastName
+  - fullName?: string varchar
+  + role: ADMIN|USER
+  + accountVerificationCode?: string varchar
+  + forgotPasswordCode?: string varchar
+  + googleUserId?: string varchar
+  + googleToken?: string varchar
+  + facebookUserId?: string varchar
+  + facebookAccessToken?: string varchar
+
+Token:
+  - content
+
+Channel:
+  - name
+
+Notification:
+  + data?: string varchar
+  - title?: string varchar
+  - body?: string varchar
+  - priority: default|normal|high
+  - sound: default|none
+  - badge?: number integer
+
+TokenChannelSubscription:
+
+NotificationChannel:
+
+Token has many TokenChannelSubscription as subscriptions
+TokenChannelSubscription has one Token as token
+
+Channel has many TokenChannelSubscription as subscriptions
+TokenChannelSubscription has one Channel as channel
+
+File:
+  - contentBase64: string text
+  + slug
+
+Notification has many NotificationChannel as notificationChannels
+NotificationChannel has one Notification as notification
+
+Channel has many NotificationChannel as notificationChannels
+NotificationChannel has one Channel as channel

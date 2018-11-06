@@ -1,0 +1,227 @@
+type Channel {
+  id: EntityId!
+  name: String!
+  subscriptions: [TokenChannelSubscription!]!
+  notificationChannels: [NotificationChannel!]!
+}
+
+input ChannelCreateInput {
+  name: String!
+}
+
+input ChannelEditInput {
+  id: EntityId!
+  name: String
+}
+
+input ChannelNestedInput {
+  id: EntityId
+  name: String
+}
+
+"""ID scalar type"""
+scalar EntityId
+
+type File {
+  id: EntityId!
+  contentBase64: String!
+  url: String!
+  thumbUrl: String!
+}
+
+input FileCreateInput {
+  contentBase64: String!
+}
+
+input FileEditInput {
+  id: EntityId!
+  contentBase64: String
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type LoginResponse {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  emailRegister(input: UserCreateInput!): LoginResponse!
+  emailLogin(password: String!, email: String!): LoginResponse!
+  logout: Boolean!
+  facebookLogin(facebookAccessToken: String!): String!
+  googleLogin(googleAccessToken: String!): String!
+  createChannel(input: ChannelCreateInput!): Channel!
+  updateChannel(input: ChannelEditInput!): Channel!
+  deleteChannels(ids: [ID!]!): Boolean!
+  createFile(input: FileCreateInput!): File!
+  updateFile(input: FileEditInput!): File!
+  deleteFiles(ids: [ID!]!): Boolean!
+  createNotificationChannel(input: NotificationChannelCreateInput!): NotificationChannel!
+  updateNotificationChannel(input: NotificationChannelEditInput!): NotificationChannel!
+  deleteNotificationChannels(ids: [ID!]!): Boolean!
+  createNotification(input: NotificationCreateInput!): Notification!
+  updateNotification(input: NotificationEditInput!): Notification!
+  deleteNotifications(ids: [ID!]!): Boolean!
+  forgotPassword(email: String!): Boolean!
+  resetPassword(newPassword: String!, forgotPasswordCode: String!): LoginResponse!
+  changePassword(newPassword: String!, oldPassword: String!): Boolean!
+  createTokenChannelSubscription(input: TokenChannelSubscriptionCreateInput!): TokenChannelSubscription!
+  updateTokenChannelSubscription(input: TokenChannelSubscriptionEditInput!): TokenChannelSubscription!
+  deleteTokenChannelSubscriptions(ids: [ID!]!): Boolean!
+  createToken(input: TokenCreateInput!): Token!
+  updateToken(input: TokenEditInput!): Token!
+  deleteTokens(ids: [ID!]!): Boolean!
+  registerToken(channelsNames: [String!]!, pushToken: String!): Token!
+  createUser(input: UserCreateInput!): User!
+  updateUser(input: UserEditInput!): User!
+  deleteUsers(ids: [ID!]!): Boolean!
+}
+
+type Notification {
+  id: EntityId!
+  title: String
+  body: String
+  priority: NotificationPriority!
+  sound: NotificationSound!
+  badge: Float
+  notificationChannels: [NotificationChannel!]!
+}
+
+type NotificationChannel {
+  id: EntityId!
+  notification: Notification!
+  channel: Channel!
+}
+
+input NotificationChannelCreateInput {
+  notification: NotificationNestedInput!
+  channel: ChannelNestedInput!
+}
+
+input NotificationChannelEditInput {
+  id: EntityId!
+  notification: NotificationNestedInput
+  channel: ChannelNestedInput
+}
+
+input NotificationCreateInput {
+  title: String
+  body: String
+  priority: NotificationPriority!
+  sound: NotificationSound!
+  badge: Float
+  channelsNames: [String!]!
+  data: JSON
+}
+
+input NotificationEditInput {
+  id: EntityId!
+  title: String
+  body: String
+  priority: NotificationPriority
+  sound: NotificationSound
+  badge: Float
+}
+
+input NotificationNestedInput {
+  id: EntityId
+  title: String
+  body: String
+  priority: NotificationPriority
+  sound: NotificationSound
+  badge: Float
+}
+
+enum NotificationPriority {
+  default
+  normal
+  high
+}
+
+enum NotificationSound {
+  default
+  none
+}
+
+type Query {
+  channel(id: EntityId!): Channel!
+  channels: [Channel!]!
+  file(id: EntityId!): File!
+  files: [File!]!
+  notificationChannel(id: EntityId!): NotificationChannel!
+  notificationChannels: [NotificationChannel!]!
+  notification(id: EntityId!): Notification!
+  notifications: [Notification!]!
+  tokenChannelSubscription(id: EntityId!): TokenChannelSubscription!
+  tokenChannelSubscriptions: [TokenChannelSubscription!]!
+  token(id: EntityId!): Token!
+  tokens: [Token!]!
+  user(id: EntityId!): User!
+  users: [User!]!
+}
+
+type Token {
+  id: EntityId!
+  content: String!
+  subscriptions: [TokenChannelSubscription!]!
+}
+
+type TokenChannelSubscription {
+  id: EntityId!
+  token: Token!
+  channel: Channel!
+}
+
+input TokenChannelSubscriptionCreateInput {
+  token: TokenNestedInput!
+  channel: ChannelNestedInput!
+}
+
+input TokenChannelSubscriptionEditInput {
+  id: EntityId!
+  token: TokenNestedInput
+  channel: ChannelNestedInput
+}
+
+input TokenCreateInput {
+  content: String!
+}
+
+input TokenEditInput {
+  id: EntityId!
+  content: String
+}
+
+input TokenNestedInput {
+  id: EntityId
+  content: String
+}
+
+type User {
+  id: EntityId!
+  email: String
+  firstName: String!
+  lastName: String!
+  fullName: String
+}
+
+input UserCreateInput {
+  email: String
+  password: String!
+  firstName: String!
+  lastName: String!
+  fullName: String
+}
+
+input UserEditInput {
+  id: EntityId!
+  email: String
+  password: String
+  firstName: String
+  lastName: String
+  fullName: String
+}
