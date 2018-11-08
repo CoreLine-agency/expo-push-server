@@ -74,6 +74,13 @@ export class Notification implements IAuthorizable {
   })
   public badge?: number | null;
 
+  @Field(() => String, { nullable: true })
+  @Column({nullable: true, type: 'varchar',
+    // <custom-column-args>
+    // </custom-column-args>
+  })
+  public channelId?: string | null;
+
   @OneToMany((type) => NotificationChannel, (notificationChannel) => notificationChannel.notification)
   @Field((returns) => [NotificationChannel])
   public notificationChannels: Promise<Array<NotificationChannel>>;

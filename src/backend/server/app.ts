@@ -94,6 +94,7 @@ async function bootstrap() {
     logging: config.databaseLogging,
     url: config.databaseUrl,
     synchronize: config.databaseSynchronize,
+    database: config.databaseType === 'sqlite' ? 'database.sqlite' : undefined,
   };
 
   await createConnection(connectionOptions);

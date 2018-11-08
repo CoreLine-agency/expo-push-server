@@ -26,6 +26,9 @@ export class NotificationCreateInput {
   @Field(() => Number, { nullable: true })
   public badge?: number | null;
 
+  @Field(() => String, { nullable: true })
+  public channelId?: string | null;
+
   // <keep-methods>
   @Field(() => [String])
   public channelsNames: Array<string>;

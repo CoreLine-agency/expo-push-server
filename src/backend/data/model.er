@@ -26,6 +26,7 @@ Notification:
   - priority: default|normal|high
   - sound: default|none
   - badge?: number integer
+  - channelId?: string varchar
 
 TokenChannelSubscription:
 
