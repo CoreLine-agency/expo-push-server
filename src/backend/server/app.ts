@@ -9,6 +9,7 @@ import * as jwt from 'jsonwebtoken';
 import * as Raven from 'raven';
 import { buildSchema } from 'type-graphql';
 import { ConnectionOptions, createConnection, getConnection } from 'typeorm';
+import * as cleanDeep from 'clean-deep';
 import { IRequestContext } from '../data/IRequestContext';
 import { AuthorizationMiddleware } from '../utils/auth/AuthorizationMiddleware';
 import { IToken } from '../utils/auth/IToken';
@@ -88,14 +89,14 @@ async function bootstrap() {
   }
   app.get('/files/:slug', asyncWrap(getFile));
 
-  const connectionOptions: ConnectionOptions = {
+  const connectionOptions: ConnectionOptions = cleanDeep({
     entities: ['src/backend/data/models/**.ts'],
     type: config.databaseType,
     logging: config.databaseLogging,
     url: config.databaseUrl,
     synchronize: config.databaseSynchronize,
     database: config.databaseType === 'sqlite' ? 'database.sqlite' : undefined,
-  };
+  });
 
   console.log('connectionOptions', connectionOptions);
   await createConnection(connectionOptions);
