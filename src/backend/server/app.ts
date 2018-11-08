@@ -97,6 +97,7 @@ async function bootstrap() {
     database: config.databaseType === 'sqlite' ? 'database.sqlite' : undefined,
   };
 
+  console.log('connectionOptions', connectionOptions);
   await createConnection(connectionOptions);
 
   await server.start(serverOptions, ({ playground }) => {
