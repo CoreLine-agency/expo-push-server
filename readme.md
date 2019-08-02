@@ -22,6 +22,6 @@ After setting "request.credentials" to "include" in console settings, you can tr
 
 ### env variables for production run
 DATABASE_TYPE=postgres  
-DATABASE_URL=postgres://user:password@host:post/database-name (automatically provided by Heroku's postgress DB)  
+DATABASE_URL=postgres://user:password@host:post/database-name (automatically provided by Heroku's postgres)  
 JWT_SECRET=random-string  
 PORT=5001 (automatically provided by Heroku)  
