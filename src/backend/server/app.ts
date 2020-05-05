@@ -1,6 +1,7 @@
 // tslint:disable no-console
 import * as appRoot from 'app-root-path';
 import * as bodyParser from 'body-parser';
+// import * as cleanDeep from 'clean-deep';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as asyncWrap from 'express-async-wrapper';
@@ -9,7 +10,6 @@ import * as jwt from 'jsonwebtoken';
 import * as Raven from 'raven';
 import { buildSchema } from 'type-graphql';
 import { ConnectionOptions, createConnection, getConnection } from 'typeorm';
-import * as cleanDeep from 'clean-deep';
 import { IRequestContext } from '../data/IRequestContext';
 import { AuthorizationMiddleware } from '../utils/auth/AuthorizationMiddleware';
 import { IToken } from '../utils/auth/IToken';
@@ -17,6 +17,9 @@ import config from './config';
 import { formatError, ravenMiddleware } from './format-error';
 import { createGraphqlFile, createSchemaJsonFile } from './server-helpers';
 import { getFile, isDevEnv } from './utils';
+
+const cleanDeep = require('clean-deep');
+
 
 Raven.config(config.sentryDsn, {
   environment: config.environment,
