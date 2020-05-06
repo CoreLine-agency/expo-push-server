@@ -33,7 +33,8 @@ export class NotificationCrudResolver {
   }
 
   @Mutation((returns) => Notification)
-  public async createNotification(@Arg('input') input: NotificationCreateInput, @Ctx() ctx: IRequestContext): Promise<Notification> {
+  public async createNotification(@Arg('input') input: NotificationCreateInput, @Ctx() ctx: IRequestContext): Promise<Notification | null> {
+    try {
     const model = new Notification();
     await model.update(input, ctx);
 
@@ -71,6 +72,12 @@ export class NotificationCrudResolver {
     // </keep-create-code>
 
     return model;
+    } catch (e) {
+      console.log('error', e);
+      console.log(JSON.stringify(e));
+
+      return null;
+    }
   }
 
   @Mutation((returns) => Notification)
