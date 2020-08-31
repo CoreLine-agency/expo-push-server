@@ -64,7 +64,11 @@ export class NotificationCrudResolver {
     const tickets: Array<ExpoPushTicket> = [];
     console.log(JSON.stringify(messages));
     for (const chunk of expo.chunkPushNotifications(messages)) {
-      tickets.push(...await expo.sendPushNotificationsAsync(chunk));
+      try {
+        tickets.push(...await expo.sendPushNotificationsAsync(chunk));
+      } catch (e) {
+        console.log(e);
+      }
     }
     console.log('sent', messages.length, 'messages');
     // </keep-create-code>
