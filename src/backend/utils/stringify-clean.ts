@@ -1,5 +1,8 @@
-import * as cleanDeep from 'clean-deep';
+// import * as cleanDeep from 'clean-deep';
 import { isEmpty } from 'lodash';
+
+const cleanDeep = require('clean-deep');
+
 
 export function stringifyClean(obj: object, literals: Array<string> = [], emptyStringForEmptyObject = true): string {
   const cleaned = cleanDeep(obj);
