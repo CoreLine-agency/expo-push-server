@@ -41,7 +41,7 @@
     "reflect-metadata": "^0.1.10",
     "ts-node": "^7.0.1",
     "type-graphql": "^0.15.0",
-    "typeorm": "0.2.3",
+    "typeorm": "0.3.0",
     "typescript": "2.5.2"
   },
   "devDependencies": {
